@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대시보드 - 임대택스</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 사이드바 -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>임대택스</span>
+            </a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>대시보드</span>
+            </a>
+            <a href="invoices.html" class="nav-item">
+                <i class="fas fa-file-invoice"></i>
+                <span>세금계산서</span>
+            </a>
+            <a href="vat-returns.html" class="nav-item">
+                <i class="fas fa-calculator"></i>
+                <span>부가세 신고</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>프로필</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>로그아웃</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- 메인 컨텐츠 -->
+    <main class="main-content">
+        <!-- 헤더 -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>대시보드</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">사용자</span>
+                        <span class="user-email" id="userEmail">user@email.com</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- 통계 카드 -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="totalInvoices">0</h3>
+                        <p class="stat-label">총 세금계산서</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="approvedInvoices">0</h3>
+                        <p class="stat-label">발행 완료</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="pendingInvoices">0</h3>
+                        <p class="stat-label">처리 중</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-won-sign"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="totalAmount">0원</h3>
+                        <p class="stat-label">총 발행 금액</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 최근 세금계산서 -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>최근 세금계산서</h2>
+                <a href="invoices.html" class="btn btn-primary btn-sm">
+                    전체보기 <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>발행일</th>
+                            <th>거래처</th>
+                            <th>공급가액</th>
+                            <th>세액</th>
+                            <th>합계</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentInvoicesTable">
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <p>최근 세금계산서가 없습니다</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- 부가세 신고 현황 -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>부가세 신고 현황</h2>
+                <a href="vat-returns.html" class="btn btn-primary btn-sm">
+                    전체보기 <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>신고기간</th>
+                            <th>매출세액</th>
+                            <th>매입세액</th>
+                            <th>납부세액</th>
+                            <th>신고기한</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vatReturnsTable">
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <p>부가세 신고 내역이 없습니다</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

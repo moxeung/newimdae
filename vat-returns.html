@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부가세 신고 - 임대택스</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 사이드바 -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>임대택스</span>
+            </a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>대시보드</span>
+            </a>
+            <a href="invoices.html" class="nav-item">
+                <i class="fas fa-file-invoice"></i>
+                <span>세금계산서</span>
+            </a>
+            <a href="vat-returns.html" class="nav-item active">
+                <i class="fas fa-calculator"></i>
+                <span>부가세 신고</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>프로필</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>로그아웃</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- 메인 컨텐츠 -->
+    <main class="main-content">
+        <!-- 헤더 -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>부가가치세 신고내역</h1>
+            </div>
+        </header>
+        
+        <!-- 필터 -->
+        <section class="filter-section">
+            <div class="filter-group">
+                <div class="filter-item">
+                    <label>년도</label>
+                    <select id="yearFilter">
+                        <option value="2024">2024년</option>
+                        <option value="2023">2023년</option>
+                        <option value="2022">2022년</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label>기수</label>
+                    <select id="quarterFilter">
+                        <option value="all">전체</option>
+                        <option value="1">1기 (1~6월)</option>
+                        <option value="2">2기 (7~12월)</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label>상태</label>
+                    <select id="statusFilter">
+                        <option value="all">전체</option>
+                        <option value="신고완료">신고완료</option>
+                        <option value="납부완료">납부완료</option>
+                        <option value="미신고">미신고</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 테이블 -->
+        <section class="content-section">
+            <div class="table-container">
+                <table class="data-table vat-table">
+                    <thead>
+                        <tr>
+                            <th>신고기간</th>
+                            <th>매출세액</th>
+                            <th>매입세액</th>
+                            <th>납부세액</th>
+                            <th>환급세액</th>
+                            <th>신고기한</th>
+                            <th>납부기한</th>
+                            <th>상태</th>
+                            <th>작업</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vatReturnsTable">
+                        <tr>
+                            <td colspan="9" class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <p>부가세 신고 내역이 없습니다</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 페이지네이션 -->
+            <div class="pagination" id="pagination">
+                <!-- JavaScript로 동적 생성 -->
+            </div>
+        </section>
+        
+        <!-- 안내 정보 -->
+        <section class="info-section">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="info-content">
+                    <h3>부가가치세 신고 안내</h3>
+                    <ul>
+                        <li>1기 확정신고: 1~6월 과세분, 신고기한 7월 25일</li>
+                        <li>2기 확정신고: 7~12월 과세분, 신고기한 다음해 1월 25일</li>
+                        <li>간이과세자: 연 1회 (1~12월), 신고기한 다음해 1월 25일</li>
+                        <li>신고기한이 공휴일인 경우 익일까지 연장됩니다</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script src="js/vat-returns.js"></script>
+</body>
+</html>
